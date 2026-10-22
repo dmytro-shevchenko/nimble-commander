@@ -41,6 +41,7 @@ using StateActionsMap = ankerl::unordered_dense::map<SEL, std::unique_ptr<const 
 - (IBAction)OnWindowShowPreviousTab:(id)sender;
 - (IBAction)OnWindowShowNextTab:(id)sender;
 - (IBAction)OnShowTabs:(id)sender;
+- (IBAction)OnShowFunctionKeysBar:(id)sender;
 - (IBAction)OnFileCopyCommand:(id)sender;
 - (IBAction)OnFileCopyAsCommand:(id)sender;
 - (IBAction)OnFileRenameMoveCommand:(id)sender;

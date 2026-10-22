@@ -526,6 +526,12 @@ DQ
                                     <action selector="OnShowToolbar:" target="-1" id="R1D-yh-leB"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Show/Hide Function Keys Bar" tag="13181" id="FKB-01-Bar">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="OnShowFunctionKeysBar:" target="-1" id="FKB-02-Act"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Show/Hide Terminal" tag="13190" keyEquivalent="o" id="wOP-H6-qux">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>

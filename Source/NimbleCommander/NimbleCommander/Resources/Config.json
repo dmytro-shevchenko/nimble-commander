@@ -17,6 +17,11 @@
          * Show/hide tabs bar
          */
         "showTabs": false,
+
+        /**
+         * Show/hide the function keys bar at the bottom of the file panels window
+         */
+        "showFunctionKeysBar": true,
         
         /**
          * Force NC to treat incoming FnXX keys as functional ones, not multimedia controls

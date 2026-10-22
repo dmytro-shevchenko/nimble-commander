@@ -33,6 +33,7 @@ class Model;
 @class FilePanelOverlappedTerminal;
 @class MainWindowFilePanelsStateToolbarDelegate;
 @class ColoredSeparatorLine;
+@class NCFunctionKeysBar;
 @class NCPanelQLPanelAdaptor;
 @class NCCommandPopover;
 
@@ -54,11 +55,14 @@ struct MainWindowFilePanelState_OverlappedTerminalSupport;
     std::unique_ptr<MainWindowFilePanelState_OverlappedTerminalSupport> m_OverlappedTerminal;
 
     ColoredSeparatorLine *m_SeparatorLine;
+    NCFunctionKeysBar *m_FunctionKeysBar;
+    NSLayoutConstraint *m_FunctionKeysBarHeightConstraint;
     MainWindowFilePanelsStateToolbarDelegate *m_ToolbarDelegate;
     __weak NSResponder *m_LastResponder;
     NCCommandPopover *m_CommandPopover;
 
     bool m_ShowTabs;
+    bool m_ShowFunctionKeysBar;
 
     std::vector<nc::config::Token> m_ConfigTickets;
     std::shared_ptr<nc::ops::Pool> m_OperationsPool;
@@ -180,6 +184,8 @@ struct MainWindowFilePanelState_OverlappedTerminalSupport;
 @interface MainWindowFilePanelState ()
 
 - (void)updateBottomConstraint;
+
+- (void)updateFunctionKeysBarVisibility;
 
 - (void)addNewControllerOnLeftPane:(PanelController *)_pc;
 - (void)addNewControllerOnRightPane:(PanelController *)_pc;

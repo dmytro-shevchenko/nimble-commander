@@ -2785,6 +2785,30 @@
         }
       }
     },
+    "FKB-01-Bar.title" : {
+      "comment" : "Class = \"NSMenuItem\"; title = \"Show/Hide Function Keys Bar\"; ObjectID = \"FKB-01-Bar\";",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show/Hide Function Keys Bar"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать/скрыть панель функциональных клавиш"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示/隐藏功能键栏"
+          }
+        }
+      }
+    },
     "I1T-dz-dM2.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"Show/Hide Toolbar\"; ObjectID = \"I1T-dz-dM2\";",
       "extractionState" : "extracted_with_value",

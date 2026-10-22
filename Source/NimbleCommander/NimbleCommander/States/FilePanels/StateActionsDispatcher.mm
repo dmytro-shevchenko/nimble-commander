@@ -238,6 +238,10 @@ static void Perform(SEL _sel, const StateActionsMap &_map, MainWindowFilePanelSt
 {
     PERFORM;
 }
+- (IBAction)OnShowFunctionKeysBar:(id)sender
+{
+    PERFORM;
+}
 - (IBAction)OnFileCopyCommand:(id)sender
 {
     PERFORM;

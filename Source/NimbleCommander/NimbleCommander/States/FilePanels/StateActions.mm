@@ -4,6 +4,7 @@
 #include "Actions/ShowGoToPopup.h"
 #include "Actions/ToggleSingleOrDualMode.h"
 #include "Actions/ShowTabs.h"
+#include "Actions/ShowFunctionKeysBar.h"
 #include "Actions/CopyFile.h"
 #include "Actions/RevealInOppositePanel.h"
 #include "Actions/ShowTerminal.h"
@@ -37,6 +38,7 @@ StateActionsMap BuildStateActionsMap(nc::config::Config &_global_config,
     add(@selector(OnWindowShowPreviousTab:), new ShowPreviousTab);
     add(@selector(OnWindowShowNextTab:), new ShowNextTab);
     add(@selector(OnShowTabs:), new ShowTabs);
+    add(@selector(OnShowFunctionKeysBar:), new ShowFunctionKeysBar);
     add(@selector(OnShowTerminal:), new ShowTerminal);
     add(@selector(OnSyncPanels:), new SyncPanels);
     add(@selector(OnSwapPanels:), new SwapPanels);

@@ -108,6 +108,12 @@ Each panel is vertically divided into three logical parts:
 - File items: displays a list of the file items in the location of this panel.
 - Footer: shows the filename of the focused item, its size and modification date, the total number of items in the panel, and the free space available on this storage.
 
+A function keys bar can be shown along the bottom of this window.
+Each button runs one of the panel actions and shows the hotkey currently assigned to it: Left, Right, View, Edit, Copy, Move, MkDir, Delete, and Compress.
+Show or hide the bar with `View > Show Function Keys Bar`.
+The choice is stored in settings and applies to every file-panels window.
+The bar is hidden while the panels themselves are hidden to give the whole window to the overlapped terminal.
+
 ## Navigation
 Nimble Commander supports both mouse-based and keyboard-based navigation inside the file panel, although the keyboard is preferred.
 Use a single mouse click to change the cursor position (i.e., the focused item) and scroll gestures to scroll through the contents of the file panel without changing the cursor position.
@@ -822,6 +828,7 @@ Some actions do not have default hotkeys but can still be accessed through the a
 | &nbsp; &nbsp; Focus Overlapped Terminal      | Ctrl + Opt + Tab          |
 | &nbsp; Show Tab Bar                          | Shift + Cmd + T           |
 | &nbsp; Show Toolbar                          | Opt + Cmd + T             |
+| &nbsp; Show Function Keys Bar                |                           |
 | &nbsp; Show Terminal                         | Opt + Cmd + O             |
 | _**Go Menu**_                                |                           |
 | &nbsp; Left Panel...                         | F1                        |

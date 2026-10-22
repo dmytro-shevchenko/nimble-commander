@@ -153,6 +153,7 @@ static const auto g_ConfigGapPath = "filePanel.general.bottomGapForOverlappedTer
 {
     [self activateOverlappedTerminal];
     m_SplitView.hidden = true;
+    [self updateFunctionKeysBarVisibility];
     [self updateOverlappedTerminalVisibility];
     [self moveFocusToOverlappedTerminal];
 }
@@ -160,6 +161,7 @@ static const auto g_ConfigGapPath = "filePanel.general.bottomGapForOverlappedTer
 - (void)showPanelsSplitView
 {
     m_SplitView.hidden = false;
+    [self updateFunctionKeysBarVisibility];
     [self updateOverlappedTerminalVisibility];
     [self moveFocusBackToPanels];
 }

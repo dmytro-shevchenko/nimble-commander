@@ -123,6 +123,8 @@
 		CF0A484B2BDDA29A00833160 /* ShowQuickLook.mm in Sources */ = {isa = PBXBuildFile; fileRef = CF5E9A521FCBF57A005608F5 /* ShowQuickLook.mm */; };
 		CF0A484C2BDDA29F00833160 /* ShowSystemOverview.mm in Sources */ = {isa = PBXBuildFile; fileRef = CF5E9A581FCBFE77005608F5 /* ShowSystemOverview.mm */; };
 		CF0A484D2BDDA2A300833160 /* ShowTabs.mm in Sources */ = {isa = PBXBuildFile; fileRef = CF197C451FB834B7009F6C59 /* ShowTabs.mm */; };
+		CFB1F0032F10000100833160 /* FunctionKeysBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = CFB1F0022F10000100833160 /* FunctionKeysBar.mm */; };
+		CFB1F0062F10000100833160 /* ShowFunctionKeysBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = CFB1F0052F10000100833160 /* ShowFunctionKeysBar.mm */; };
 		CF0A484E2BDDA2A700833160 /* ShowTerminal.mm in Sources */ = {isa = PBXBuildFile; fileRef = CF20DF341FC66E5F0074ABB8 /* ShowTerminal.mm */; };
 		CF0A484F2BDDA2AC00833160 /* ShowVolumeInformation.mm in Sources */ = {isa = PBXBuildFile; fileRef = CFD8CDBD1E8CD6A700E4DC53 /* ShowVolumeInformation.mm */; };
 		CF0A48502BDDA2B100833160 /* SpotlightSearch.mm in Sources */ = {isa = PBXBuildFile; fileRef = CFD8CDD51E8DEDB200E4DC53 /* SpotlightSearch.mm */; };
@@ -909,6 +911,10 @@
 		CF197C421FB81ACA009F6C59 /* ToggleSingleOrDualMode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ToggleSingleOrDualMode.mm; path = NimbleCommander/States/FilePanels/Actions/ToggleSingleOrDualMode.mm; sourceTree = SOURCE_ROOT; };
 		CF197C441FB834B7009F6C59 /* ShowTabs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShowTabs.h; path = NimbleCommander/States/FilePanels/Actions/ShowTabs.h; sourceTree = SOURCE_ROOT; };
 		CF197C451FB834B7009F6C59 /* ShowTabs.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ShowTabs.mm; path = NimbleCommander/States/FilePanels/Actions/ShowTabs.mm; sourceTree = SOURCE_ROOT; };
+		CFB1F0012F10000100833160 /* FunctionKeysBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FunctionKeysBar.h; path = NimbleCommander/States/FilePanels/Views/FunctionKeysBar.h; sourceTree = SOURCE_ROOT; };
+		CFB1F0022F10000100833160 /* FunctionKeysBar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FunctionKeysBar.mm; path = NimbleCommander/States/FilePanels/Views/FunctionKeysBar.mm; sourceTree = SOURCE_ROOT; };
+		CFB1F0042F10000100833160 /* ShowFunctionKeysBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShowFunctionKeysBar.h; path = NimbleCommander/States/FilePanels/Actions/ShowFunctionKeysBar.h; sourceTree = SOURCE_ROOT; };
+		CFB1F0052F10000100833160 /* ShowFunctionKeysBar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ShowFunctionKeysBar.mm; path = NimbleCommander/States/FilePanels/Actions/ShowFunctionKeysBar.mm; sourceTree = SOURCE_ROOT; };
 		CF197C471FB92E80009F6C59 /* CopyFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CopyFile.h; path = NimbleCommander/States/FilePanels/Actions/CopyFile.h; sourceTree = SOURCE_ROOT; };
 		CF197C481FB92E80009F6C59 /* CopyFile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CopyFile.mm; path = NimbleCommander/States/FilePanels/Actions/CopyFile.mm; sourceTree = SOURCE_ROOT; };
 		CF197C4A1FB960CC009F6C59 /* RevealInOppositePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RevealInOppositePanel.h; path = NimbleCommander/States/FilePanels/Actions/RevealInOppositePanel.h; sourceTree = SOURCE_ROOT; };
@@ -1628,6 +1634,8 @@
 				CF4E56CF1D506B9200452912 /* FindFilesSheetController.h */,
 				CF4E56D01D506B9200452912 /* FindFilesSheetController.mm */,
 				CF4E56DF1D506BA100452912 /* FindFilesSheetController.xib */,
+				CFB1F0012F10000100833160 /* FunctionKeysBar.h */,
+				CFB1F0022F10000100833160 /* FunctionKeysBar.mm */,
 				CFA0B23318693F1100501C35 /* GoToFolderSheetController.h */,
 				CFA0B23418693F1100501C35 /* GoToFolderSheetController.mm */,
 				CFCCFBC61A5D7F0E00313845 /* GoToFolderSheetController.xib */,
@@ -1822,6 +1830,8 @@
 				CF5E9A581FCBFE77005608F5 /* ShowSystemOverview.mm */,
 				CF197C441FB834B7009F6C59 /* ShowTabs.h */,
 				CF197C451FB834B7009F6C59 /* ShowTabs.mm */,
+				CFB1F0042F10000100833160 /* ShowFunctionKeysBar.h */,
+				CFB1F0052F10000100833160 /* ShowFunctionKeysBar.mm */,
 				CF20DF331FC66E5F0074ABB8 /* ShowTerminal.h */,
 				CF20DF341FC66E5F0074ABB8 /* ShowTerminal.mm */,
 				CFD8CDBC1E8CD6A700E4DC53 /* ShowVolumeInformation.h */,
@@ -3207,6 +3217,8 @@
 				CF0A48472BDDA28600833160 /* RenameInPlace.mm in Sources */,
 				CF0A48202BDDA03A00833160 /* PanelControllerActionsDispatcher.mm in Sources */,
 				CF0A484D2BDDA2A300833160 /* ShowTabs.mm in Sources */,
+				CFB1F0032F10000100833160 /* FunctionKeysBar.mm in Sources */,
+				CFB1F0062F10000100833160 /* ShowFunctionKeysBar.mm in Sources */,
 				CF0A48672BDDA3EB00833160 /* PanelListViewRowView.mm in Sources */,
 				CF0A48852BDDA57100833160 /* AskForPasswordWindowController.mm in Sources */,
 				CFCBA8BC2CC3B1B4009ABD2C /* ShowContextMenu.mm in Sources */,

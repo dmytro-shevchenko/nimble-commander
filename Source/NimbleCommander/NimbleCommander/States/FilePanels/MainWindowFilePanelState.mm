@@ -23,6 +23,7 @@
 #include "Views/FilePanelMainSplitView.h"
 #include "Views/BriefSystemOverview.h"
 #include "Views/FilePanelOverlappedTerminal.h"
+#include "Views/FunctionKeysBar.h"
 #include <Panel/PanelData.h>
 #include "PanelView.h"
 #include <Operations/Pool.h>
@@ -49,6 +50,7 @@ static const auto g_ConfigGoToActivation = "filePanel.general.goToButtonForcesPa
 static const auto g_ConfigInitialLeftPath = "filePanel.general.initialLeftPanelPath";
 static const auto g_ConfigInitialRightPath = "filePanel.general.initialRightPanelPath";
 static const auto g_ConfigGeneralShowTabs = "general.showTabs";
+static const auto g_ConfigShowFunctionKeysBar = "general.showFunctionKeysBar";
 static const auto g_ConfigRouteKeyboardInputIntoTerminal = "filePanel.general.routeKeyboardInputIntoTerminal";
 static const auto g_ResorationPanelsKey = "panels_v1";
 static const auto g_ResorationUIKey = "uiState";
@@ -95,6 +97,7 @@ static NSString *TitleForData(const data::Model *_data);
         m_OperationsPool = _pool.shared_from_this();
         m_OverlappedTerminal = std::make_unique<MainWindowFilePanelState_OverlappedTerminalSupport>();
         m_ShowTabs = GlobalConfig().GetBool(g_ConfigGeneralShowTabs);
+        m_ShowFunctionKeysBar = GlobalConfig().GetBool(g_ConfigShowFunctionKeysBar);
         m_QLPanelAdaptor = _ql_panel_adaptor;
 
         m_LeftPanelControllers.emplace_back(m_PanelFactory());
@@ -153,6 +156,8 @@ static NSString *TitleForData(const data::Model *_data);
 {
     m_ConfigTickets.emplace_back(
         GlobalConfig().Observe(g_ConfigGeneralShowTabs, nc::objc_callback(self, @selector(onShowTabsSettingChanged))));
+    m_ConfigTickets.emplace_back(GlobalConfig().Observe(
+        g_ConfigShowFunctionKeysBar, nc::objc_callback(self, @selector(onShowFunctionKeysBarSettingChanged))));
     m_ThemesObservationTicket = NCAppDelegate.me.themesManager.ObserveChanges(
         nc::ThemesManager::Notifications::FilePanelsGeneral, nc::objc_callback(self, @selector(onThemeChanged)));
 }
@@ -279,29 +284,45 @@ static NSString *TitleForData(const data::Model *_data);
     m_SeparatorLine.borderColor = nc::CurrentTheme().FilePanelsGeneralTopSeparatorColor();
     [self addSubview:m_SeparatorLine];
 
+    m_FunctionKeysBar = [[NCFunctionKeysBar alloc] initWithFrame:NSRect()
+                                         actionsShortcutsManager:NCAppDelegate.me.actionsShortcutsManager];
+    m_FunctionKeysBar.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addSubview:m_FunctionKeysBar];
+
     m_ToolbarDelegate =
         [[MainWindowFilePanelsStateToolbarDelegate alloc] initWithToolsStorage:NCAppDelegate.me.externalTools
                                                        actionsShortcutsManager:NCAppDelegate.me.actionsShortcutsManager
                                                              andOperationsPool:self.operationsPool];
 
-    auto views = NSDictionaryOfVariableBindings(m_SeparatorLine, m_SplitView);
+    auto views = NSDictionaryOfVariableBindings(m_SeparatorLine, m_SplitView, m_FunctionKeysBar);
     auto contraints = {@"V:|-(==0@250)-[m_SeparatorLine(==1)]-(==0)-[m_SplitView(>=150@500)]",
                        @"|-(0)-[m_SplitView]-(0)-|",
-                       @"|-(==0)-[m_SeparatorLine]-(==0)-|"};
+                       @"|-(==0)-[m_SeparatorLine]-(==0)-|",
+                       @"|-(0)-[m_FunctionKeysBar]-(0)-|",
+                       @"V:[m_FunctionKeysBar]-(0)-|"};
     for( auto vis_fmt : contraints )
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vis_fmt
                                                                      options:0
                                                                      metrics:nil
                                                                        views:views]];
+    m_FunctionKeysBarHeightConstraint = [NSLayoutConstraint constraintWithItem:m_FunctionKeysBar
+                                                                     attribute:NSLayoutAttributeHeight
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:nil
+                                                                     attribute:NSLayoutAttributeNotAnAttribute
+                                                                    multiplier:1
+                                                                      constant:0];
+    m_FunctionKeysBarHeightConstraint.active = true;
     m_MainSplitViewBottomConstraint = [NSLayoutConstraint constraintWithItem:m_SplitView
                                                                    attribute:NSLayoutAttributeBottom
                                                                    relatedBy:NSLayoutRelationEqual
-                                                                      toItem:self
-                                                                   attribute:NSLayoutAttributeBottom
+                                                                      toItem:m_FunctionKeysBar
+                                                                   attribute:NSLayoutAttributeTop
                                                                   multiplier:1
                                                                     constant:0];
     m_MainSplitViewBottomConstraint.priority = NSLayoutPriorityDragThatCannotResizeWindow;
     [self addConstraint:m_MainSplitViewBottomConstraint];
+    [self updateFunctionKeysBarVisibility];
 
     if( !nc::base::AmISandboxed() ) {
         m_OverlappedTerminal->terminal = [[FilePanelOverlappedTerminal alloc] initWithFrame:self.bounds];
@@ -309,12 +330,13 @@ static NSString *TitleForData(const data::Model *_data);
         [self addSubview:m_OverlappedTerminal->terminal positioned:NSWindowBelow relativeTo:nil];
 
         auto terminal = m_OverlappedTerminal->terminal;
-        views = NSDictionaryOfVariableBindings(terminal, m_SeparatorLine);
+        views = NSDictionaryOfVariableBindings(terminal, m_SeparatorLine, m_FunctionKeysBar);
         [self
-            addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[m_SeparatorLine]-(0)-[terminal]-(==0)-|"
-                                                                   options:0
-                                                                   metrics:nil
-                                                                     views:views]];
+            addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"V:[m_SeparatorLine]-(0)-[terminal]-(0)-[m_FunctionKeysBar]"
+                                                   options:0
+                                                   metrics:nil
+                                                     views:views]];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(0)-[terminal]-(0)-|"
                                                                      options:0
                                                                      metrics:nil
@@ -894,6 +916,23 @@ static void AskAboutStoppingRunningOperations(NSWindow *_window, std::function<v
             m_ShowTabs = show;
             [self updateTabBarsVisibility];
         });
+}
+
+- (void)onShowFunctionKeysBarSettingChanged
+{
+    const bool show = GlobalConfig().GetBool(g_ConfigShowFunctionKeysBar);
+    if( show != m_ShowFunctionKeysBar )
+        dispatch_to_main_queue_after(1ms, [=] {
+            m_ShowFunctionKeysBar = show;
+            [self updateFunctionKeysBarVisibility];
+        });
+}
+
+- (void)updateFunctionKeysBarVisibility
+{
+    const bool show = m_ShowFunctionKeysBar && !m_SplitView.hidden;
+    m_FunctionKeysBar.hidden = !show;
+    m_FunctionKeysBarHeightConstraint.constant = show ? NCFunctionKeysBar.preferredHeight : 0.;
 }
 
 - (void)onThemeChanged
