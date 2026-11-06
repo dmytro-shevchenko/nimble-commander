@@ -21,6 +21,7 @@ SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # allocate a dir for build artifacts
 BUILD_DIR="${SCRIPTS_DIR}/build_unsigned.tmp"
+rm -rf "${BUILD_DIR}"
 mkdir "${BUILD_DIR}"
 
 LOG_FILE=${BUILD_DIR}/xcodebuild.log
@@ -52,8 +53,10 @@ APP_NAME=$($XC -showBuildSettings | grep " FULL_PRODUCT_NAME =" | sed -e 's/.*= 
 APP_PATH=$APP_DIR/$APP_NAME
 
 $XC build | tee -a ${LOG_FILE} | xcpretty
-    
-cp -R "${APP_PATH}" ./
+
+# Output goes to Scripts/ so this works whether you invoke from repo root or from Scripts/
+rm -rf "${SCRIPTS_DIR}/${APP_NAME}"
+cp -R "${APP_PATH}" "${SCRIPTS_DIR}/"
 
 VERSION=$( $PBUDDY -c "Print CFBundleShortVersionString" "$APP_PATH/Contents/Info.plist" )
 BUILD=$( $PBUDDY -c "Print CFBundleVersion" "$APP_PATH/Contents/Info.plist" )
@@ -62,10 +65,10 @@ create-dmg \
  --volname "Nimble Commander Unsigned" \
  --window-pos 200 200 \
  --window-size 610 386 \
- --background "dmg/background.png" \
+ --background "${SCRIPTS_DIR}/dmg/background.png" \
  --text-size 12 \
  --icon-size 128 \
  --icon "${APP_NAME}" 176 192 \
  --app-drop-link 432 192 \
- "nimble-commander-unsigned-${VERSION}(${BUILD}).dmg" \
- "${APP_NAME}"
+ "${SCRIPTS_DIR}/nimble-commander-unsigned-${VERSION}(${BUILD}).dmg" \
+ "${SCRIPTS_DIR}/${APP_NAME}"

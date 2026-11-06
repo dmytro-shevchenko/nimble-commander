@@ -68,11 +68,13 @@ Run `security find-identity -v -p codesigning` again until it lists your identit
 
 ### Step 1 — Build and install
 
-1. Build (example):
+1. Build (example — works from the repo root or from `Scripts/`):
 
    ```bash
    ./Scripts/build_unsigned.sh
    ```
+
+   If `./Scripts/build_unsigned.sh` fails copying into an existing `Scripts/Nimble Commander.app`, remove that folder first (it may be an older install with a different Sparkle layout).
 
 2. Mount the generated DMG under `Scripts/`, drag **Nimble Commander** to **Applications** (replace the existing app).
 3. Use this path consistently:

@@ -19,7 +19,7 @@ SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 BUILD_DIR="${SCRIPTS_DIR}/build_help.tmp"
 mkdir -p "${BUILD_DIR}"
 
-cd ../Docs
+cd "${SCRIPTS_DIR}/../Docs"
 
 pandoc \
  ./Help.md \
