@@ -88,7 +88,7 @@ Run `security find-identity -v -p codesigning` again until it lists your identit
 Adjust `SIGN_ID` to match `security find-identity -v -p codesigning`. Paths assume the repo is at `~/IdeaProjects/nimble-commander`.
 
 ```bash
-export SIGN_ID='Apple Development: your.email@example.com (TEAMID)'
+export SIGN_ID='Apple Development: dshevchenko.mail@gmail.com (36T9NVH3ZU)'
 export APP="/Applications/Nimble Commander.app"
 export SF="$APP/Contents/Frameworks/Sparkle.framework/Versions/B"
 export ENT="$HOME/IdeaProjects/nimble-commander/Source/NimbleCommander/NimbleCommander/Resources/NimbleCommander-NonMAS.entitlements"
